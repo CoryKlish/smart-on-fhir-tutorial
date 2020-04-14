@@ -71,7 +71,7 @@
   //   FHIR.oauth2.ready(onReady, onError);
   //   return ret.promise();
   // };
-  function getData(client) {
+  var getData = function (client) {
     return client.patient.request('Patient')
   }
 
