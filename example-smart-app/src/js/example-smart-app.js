@@ -74,6 +74,7 @@
   var getData = function (client) {
     client.patient.request('Patient')
       .then(function (patient) {
+        console.log(patient);
         var fname = '';
         var lname = '';
 
