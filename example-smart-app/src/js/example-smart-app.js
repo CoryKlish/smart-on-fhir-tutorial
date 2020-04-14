@@ -72,7 +72,23 @@
   //   return ret.promise();
   // };
   var getData = function (client) {
-    return client.patient.request('Patient')
+    client.patient.request('Patient')
+      .then(function (patient) {
+        var fname = '';
+        var lname = '';
+
+        if (typeof patient.name[0] !== 'undefined') {
+          fname = patient.name[0].given.join(' ');
+          lname = patient.name[0].family.join(' ');
+        }
+
+        var p = defaultPatient();
+        p.fname = fname;
+        p.lname = lname;
+
+        drawVisualization(p);
+      })
+      .catch(console.error)
   }
 
   function defaultPatient(){
