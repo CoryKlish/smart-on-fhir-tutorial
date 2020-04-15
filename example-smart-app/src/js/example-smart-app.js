@@ -115,6 +115,8 @@ var getData = function (client) {
 
       p.hdl = getQuantityValueAndUnit(hdl[0]);
       p.ldl = getQuantityValueAndUnit(ldl[0]);
+
+      drawVisualization(p);
     })
   }
 };
