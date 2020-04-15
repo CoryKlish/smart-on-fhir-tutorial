@@ -75,7 +75,25 @@ var getData = function (client) {
   if (client.hasOwnProperty('patient')) {
     var patient = client.patient;
     var pt = patient.read();
-    var obv = client.patient.request('Observation');
+    // var obv = client.patient.request('Observation');
+    var query = new URLSearchParams();
+    query.set("patient", client.patient.id);
+    query.set("_count", 100); // Try this to fetch fewer pages
+    query.set("code", [
+        'http://loinc.org|29463-7', // weight
+        'http://loinc.org|3141-9' , // weight
+        'http://loinc.org|8302-2' , // Body height
+        'http://loinc.org|8306-3' , // Body height --lying
+        'http://loinc.org|8287-5' , // headC
+        'http://loinc.org|39156-5', // BMI 39156-5
+        'http://loinc.org|18185-9', // gestAge
+        'http://loinc.org|37362-1', // bone age
+        'http://loinc.org|11884-4'  // gestAge
+    ].join(","));
+    var obv = client.request("Observation?" + query, {
+        pageLimit: 0,   // get all pages
+        flat     : true // return flat array of Observation resources
+    });
 
     Promise.all([pt, obv]).then(function (values) {
       var [patient, obv] = values;
