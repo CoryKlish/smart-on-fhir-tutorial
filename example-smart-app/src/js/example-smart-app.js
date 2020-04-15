@@ -71,17 +71,17 @@
 //   FHIR.oauth2.ready(onReady, onError);
 //   return ret.promise();
 // };
-var getData = function (smart) {
-  console.log(smart);
-  if (smart.hasOwnProperty('patient')) {
-    var patient = smart.patient;
+var getData = function (client) {
+  if (client.hasOwnProperty('patient')) {
+    var patient = client.patient;
     var pt = patient.read();
-    var obv = smart.patient.request('Observation');
+    var obv = client.patient.request('Observation');
 
-    console.log(pt);
-
-    $.when(pt, obv).done(function (patient, obv) {
-      var byCodes = smart.byCodes(obv, 'code');
+    Promise.all([pt, obv]).then(function (values) {
+      var [patient, obv] = values;
+      console.log(patient);
+      console.log(obv);
+      var byCodes = client.byCodes(obv, 'code');
       var gender = patient.gender;
 
       var fname = '';
