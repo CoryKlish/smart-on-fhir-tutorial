@@ -84,6 +84,9 @@ var getData = function (client) {
       var byCodes = client.byCodes(obv, 'code');
       var gender = patient.gender;
 
+      console.log('byCodes:');
+      console.log(byCodes);
+
       var fname = '';
       var lname = '';
 
