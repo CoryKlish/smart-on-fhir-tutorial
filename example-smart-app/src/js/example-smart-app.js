@@ -72,6 +72,7 @@
 //   return ret.promise();
 // };
 var getData = function (smart) {
+  console.log(smart);
   if (smart.hasOwnProperty('patient')) {
     var patient = smart.patient;
     var pt = patient.read();
