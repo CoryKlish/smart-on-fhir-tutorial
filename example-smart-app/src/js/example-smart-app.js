@@ -73,8 +73,7 @@
 // };
 var getData = function (client) {
   if (client.hasOwnProperty('patient')) {
-    var patient = client.patient;
-    var pt = patient.read();
+    var pt = client.patient.read();
     // var obv = client.patient.request('Observation');
     var query = new URLSearchParams();
     query.set("patient", client.patient.id);
@@ -103,7 +102,8 @@ var getData = function (client) {
       var gender = patient.gender;
 
       console.log('byCodes:');
-      console.log(byCodes);
+      console.log(byCodes("26478-8"));
+      console.log(byCodes("2345-7"));
 
       var fname = '';
       var lname = '';
